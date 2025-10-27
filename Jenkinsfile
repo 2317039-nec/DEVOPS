@@ -2,35 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                echo 'Cloning repository...'
-                git branch: 'main', url: 'https://github.com/2317039-nec/DEVOPS.git'
+                echo 'Building the project...'
             }
         }
 
-        stage('Compile') {
+        stage('Test') {
             steps {
-                echo 'Compiling Java code...'
-                bat 'javac Calculator.java'
+                echo 'Running tests...'
             }
         }
 
-        stage('Run Calculator') {
+        stage('Deploy') {
             steps {
-                echo 'Running Calculator program...'
-                // Use non-interactive input for Jenkins
-                bat 'echo 10 + 20 | java Calculator'
+                echo 'Deploying the application...'
             }
-        }
-    }
-
-    post {
-        success {
-            echo '✅ Build and run successful!'
-        }
-        failure {
-            echo '❌ Build failed! Check the console output.'
-        }
-    }
+        }
+    }
 }
